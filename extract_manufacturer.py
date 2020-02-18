@@ -1,0 +1,23 @@
+import json
+
+import os
+
+# the found manufactures
+manufactures = set()
+for filename in os.listdir('2013_camera_specs/www.ebay.com'):
+    with open('2013_camera_specs/www.ebay.com/' + filename) as f:
+        data = json.load(f)
+
+        if "brand" in data:
+
+            if isinstance(data["brand"], list):
+                for x in data["brand"]:
+                    brand = x.upper().replace(' ', '')
+                    manufactures.add(brand)
+                continue
+
+            brand = data["brand"].upper().replace(' ', '')
+            manufactures.add(brand)
+
+with open('manufacturers.json', 'w') as outfile:
+    json.dump(list(manufactures), outfile)
