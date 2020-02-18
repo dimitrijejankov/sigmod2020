@@ -26,7 +26,7 @@ for s in sites:
             for att in s[1]:
 
                 # get the value
-                value = data[att].upper()
+                value = data[att].upper().replace(' ', '')
 
                 # go through the labels
                 for label in labels:
