@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 cnt = 0
 # the found manufactures
@@ -11,12 +12,12 @@ for filename in os.listdir('2013_camera_specs/www.ebay.com'):
         if "brand" in data:
 
             if isinstance(data["brand"], list):
-                for x in data["brand"]:
-                    brand = x.upper().replace(' ', '')
-                    manufactures.add(brand)
                 continue
 
             brand = data["brand"].upper().replace(' ', '')
+            if 'DIGITALCAMERA' in brand:
+                continue
+
             manufactures.add(brand)
         else:
             cnt += 1
