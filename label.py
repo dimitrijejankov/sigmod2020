@@ -1,12 +1,13 @@
 import json
 import os
 
-with open('./manufacturers.json') as f:
+with open('./manufacturers-cleaned.json') as f:
     labels = json.load(f)
 
 sites = [['2013_camera_specs/www.walmart.com/', ['<page title>']],
          ['2013_camera_specs/buy.net/', ['<page title>']],
-         ['2013_camera_specs/www.buzzillions.com/', ['<page title>']]
+         ['2013_camera_specs/www.buzzillions.com/', ['<page title>']],
+         ['2013_camera_specs/www.cambuy.com.au/', ['<page title>']]
          ]
 
 x = 0
