@@ -45,6 +45,14 @@ for s in sites:
 
                     if s[1][1] in data:
                         model = data[s[1][1]].upper().replace(' ', '')
+
+                        if model == 'CAMERA' or model == 'DIGITAL' or len(model) == 1:
+                            cnt_no_model += 1
+                            continue
+
+                        # if model == 'N':
+                        #     model = 'POWERSHOTN'
+
                         manufacturers_dict[brand].add(model)
 
                         cnt_successfully_obtained_model += 1
@@ -54,7 +62,7 @@ for s in sites:
             else:
                 cnt_no_manufacturer += 1
 
-with open('extracted_data/manufacturers-with-models.json', 'w') as outfile:
+with open('extracted_data/ebay-manufacturers-with-models.json', 'w') as outfile:
     json.dump(manufacturers_dict, outfile, indent=2, cls=SetEncoder)
 
 print("did not have manufacturer " + str(cnt_no_manufacturer))

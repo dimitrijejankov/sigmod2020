@@ -7,7 +7,7 @@ cnt_brand_matches = 0
 cnt_model_matches = 0
 
 with open('extracted_data/manufacturers-with-models-shopmania.json') as shopmania_models, \
-        open('extracted_data/manufacturers-with-models.json') as ebay_models, \
+        open('extracted_data/ebay-manufacturers-with-models.json') as ebay_models, \
         open('extracted_data/manufacturers-cleaned.json') as brands:
     data_brands = json.load(brands)
 
