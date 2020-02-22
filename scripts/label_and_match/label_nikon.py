@@ -54,6 +54,25 @@ for s in sites:
                 match = True
                 for tag in model:
 
+                    # for coolpix we can try three different versions
+                    # COOLPIX, COOLPLIX, COOL PIX
+                    if tag == "COOLPIX":
+
+                        # check if exists
+                        tag = " COOLPIX "
+                        if tag in value:
+                            continue
+
+                        # check if exists
+                        tag = " COOL PIX "
+                        if tag in value:
+                            continue
+
+                        # check if exists
+                        tag = " COOLPLIX "
+                        if tag in value:
+                            continue
+
                     tag = " " + tag + " "
 
                     if tag not in value:
@@ -62,12 +81,12 @@ for s in sites:
 
                 if match:
                     found.append(value + str(model))
-                    print(value + str(model))
+                    #print(value + str(model))
                     break
 
             if not match:
 
-                #print(value)
+                print(value)
                 notFound.append(value)
 
 print("Not found : " + str(len(notFound)))
