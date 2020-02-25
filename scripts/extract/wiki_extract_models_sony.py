@@ -66,7 +66,6 @@ for table in tables:
            
            
            
-               
-               
+os.remove('List_of_Sony_%CE%B1_cameras.html')               
 
  
