@@ -61,10 +61,20 @@ for table in tables:
            if name[-1] == "]" and (name[-3] == "[" or name[-4] == "[" ):
                name =name[:-3]
            line = "[" + '"' + name+  '"]'
-           print(line)
            print(line, file=fo)
-           
-           
+         
+paragraphs = soup.find_all('ul')
+
+for paragraph in paragraphs:
+    with open('../../currated_data/sony-models.json', 'a') as fo:
+        for lines in paragraph.find_all('li'):
+            for title in lines.find_all('b'):
+                name = title.text.strip()
+                if name != "series":
+                    line = "[" + '"' + name+  '"]'
+                    print(line, file=fo)
+                    
+               
            
 os.remove('List_of_Sony_%CE%B1_cameras.html')               
 
