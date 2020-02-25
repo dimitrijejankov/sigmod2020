@@ -1,6 +1,8 @@
 import json
 import os
 
+os.chdir('../..')
+
 sites = ['2013_camera_specs/www.walmart.com/',
          '2013_camera_specs/buy.net/',
          '2013_camera_specs/www.buzzillions.com/',
@@ -53,7 +55,6 @@ for s in sites:
 
                 match = True
                 for tag in model:
-
                     # for coolpix we can try three different versions
                     # COOLPIX, COOLPLIX, COOL PIX
                     if tag == "COOLPIX":
@@ -81,7 +82,6 @@ for s in sites:
 
                 if match:
                     found.append(value + str(model))
-                    #print(value + str(model))
                     break
 
             if not match:
