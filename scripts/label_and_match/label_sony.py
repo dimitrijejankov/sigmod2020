@@ -75,14 +75,28 @@ for s in sites:
                     if tag4 in value:
                         match = True
                         break
-                    
-                
-
+                    tag5 =  tag + "L"
+                    if tag5 in value:
+                        match = True
+                        break
+                    tag6 =  tag + "/R"
+                    if tag6 in value:
+                        match = True
+                        break
+                    tag7 =  tag + "/W"
+                    if tag7 in value:
+                        match = True
+                        break                
+                    tag8 =  tag + "/S"
+                    if tag8 in value:
+                        match = True
+                        break 
                 if match:
                     found.append(value + str(model))
                     break
 
             if not match:
+
 
                 print(value)
                 notFound.append(value)
