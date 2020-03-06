@@ -31,7 +31,7 @@ sites = ['2013_camera_specs/www.walmart.com/',
          '2013_camera_specs/www.walmart.com/',
          '2013_camera_specs/www.wexphotographic.com/']
 
-with open('currated_data/fujifilm-models.json') as f:
+with open('currated_data/fujifilm.json') as f:
     nikon_models = json.load(f)
 
 notFound = []
@@ -79,4 +79,5 @@ for s in sites:
 
 print("Not found : " + str(len(notFound)))
 print("Found : " + str(len(found)))
+print("Found : " +str(len(found)/(len(found)+len(notFound))))
 

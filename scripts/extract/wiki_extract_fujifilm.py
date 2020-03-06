@@ -212,6 +212,86 @@ os.remove("Fuji.html")
 
 # %% x-series
 
+url = 'https://en.wikipedia.org/wiki/Fujifilm_X_series'
+
+req = urllib.request.urlopen(url)
+article = req.read().decode()
+    
+with open('Fuji.html', 'w') as fo:
+    fo.write(article)
+        
+article = open('Fuji.html').read()
+soup = BeautifulSoup(article, 'html.parser')
+                    
+paragraphs = soup.find_all('ul')
+
+for paragraph in paragraphs:
+    with open('../../currated_data/fujifilm-models.json', 'a') as fo:
+        for lines in paragraph.find_all('li'):
+            for name in lines.find_all('a'):
+                if not name:
+                    continue
+                name = name.text.strip()
+                if "Fujifilm" in name:
+                    name = name.replace("Fujifilm ","")
+                    name = name.replace("Finepix ","")
+                    
+                    if name == "X-mount" or name == "Corp. v. Benun" or name == "digital cameras":
+                        break
+                    name = name.replace("-","")
+
+                    line = "[" + '"' + name + '","' + name[:1] + " "+ name[1:]+ '","' + name[:1] + "-"+ name[1:]  + '"],'
+                    print(line,file=fo)
+                
+os.remove("Fuji.html")
 
 
+# %% fujifillm.com 
 
+urls = ["https://www.fujifilm.com/support/digital_cameras/specifications/j/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/a/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/f/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/s/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/t/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/x/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/xp/",
+       "https://www.fujifilm.com/support/digital_cameras/specifications/z/"]
+
+for url in urls:
+    req = urllib.request.urlopen(url)
+    article = req.read().decode()
+        
+    with open('Fuji.html', 'w') as fo:
+        fo.write(article)
+            
+    article = open('Fuji.html').read()
+    soup = BeautifulSoup(article, 'html.parser')
+                        
+    paragraphs = soup.find_all('span', {"class":"titleText"})
+    
+    with open('../../currated_data/fujifilm.json', 'a') as fo:
+        for title in paragraphs:
+            name = title.text.strip()
+            if "FinePix" in name:
+                line = ""
+                name = name.replace("FinePix ","")
+                if " / " in name:
+                    split_string = name.split(" / ")
+                    for name in split_string:
+                        print(name)
+                        line = "[" + '"' + name + '","' + name[:1] + " "+ name[1:]+ '","' + name[:1] + "-"+ name[1:]  + '"],'
+                        if (name[:2] == "JX" or name[:2] == "JV" or name[:2] == "JZ" or
+                            name[:2] == "HS" or name[:2] == "SL" or name[:2] == "AV" or name[:2] == "AX"):
+                            line = "[" + '"' + name + '","' + name[:2] + " "+ name[2:]+ '","' + name[:2] + "-"+ name[2:]  + '"],'
+                        print(line.upper(), file = fo)
+                              
+                else:
+                    print(name)
+                    line = "[" + '"' + name + '","' + name[:1] + " "+ name[1:]+ '","' + name[:1] + "-"+ name[1:]  + '"],'
+                    if (name[:2] == "JX" or name[:2] == "JV" or name[:2] == "JZ" or
+                        name[:2] == "HS" or name[:2] == "SL" or name[:2] == "AV" or name[:2] == "AX"):
+                        line = "[" + '"' + name + '","' + name[:2] + " "+ name[2:]+ '","' + name[:2] + "-"+ name[2:]  + '"],'
+                    print(line.upper(),file=fo)
+                
+    os.remove("Fuji.html")
+  
